@@ -89,8 +89,17 @@ def AboutUs(event):
                     ImageCarouselColumn(
                         image_url='https://i.imgur.com/eBS12QJ.png?1',
                         action=MessageTemplateAction(
+                            label='文字訊息',
+                            text='賣披薩'
                         )
                     ),
+                    ImageCarouselColumn(
+                        image_url='https://i.imgur.com/qaAdBkR.png',
+                        action=PostbackTemplateAction(
+                            label='回傳訊息',
+                            data='action=sell&item=飲料'
+                        )
+                    )
                 ]
             )
         )
