@@ -53,7 +53,7 @@ def Sendhelper(event): #按鈕樣板
         message = TemplateSendMessage(
             alt_text='helper',
             template=ButtonsTemplate(
-                thumbnail_image_url='https://i.imgur.com/8icR5rH.png',  #顯示的圖片
+                thumbnail_image_url='https://i.imgur.com/D7cqJoB.png',  #顯示的圖片
                 title='小幫手',  #主標題
                 text='請選擇：',  #副標題
                 actions=[
@@ -64,6 +64,14 @@ def Sendhelper(event): #按鈕樣板
                     URITemplateAction(  #開啟網頁
                         label='圖資課表(下學期)',
                         uri='http://web.lins.fju.edu.tw/upload/dep/course/dep-course110_2_0831.pdf'
+                    ),
+                    URITemplateAction(  #開啟網頁
+                        label='聯絡我們',
+                        uri='https://www.facebook.com/fjulis.IEST'
+                    ),
+                    URITemplateAction(  #開啟網頁
+                        label='加入我們',
+                        uri='https://www.facebook.com/fjulis.IEST'
                     ),
                 ]
             )
