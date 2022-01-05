@@ -1,1 +1,1 @@
-web: gunicorn IEST_line_bot:app
+web: gunicorn IEST_line_bot.wsgi
