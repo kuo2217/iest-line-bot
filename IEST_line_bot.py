@@ -89,43 +89,43 @@ def AboutUs(event):
                     ImageCarouselColumn(
                         image_url='https://i.imgur.com/mUOauOd.png',
                         action=MessageTemplateAction(
-                            label='',
-                            text=''
+                            label='IEST',
+                            text='IEST'
                         )
                     ),
                     ImageCarouselColumn(
                         image_url='https://i.imgur.com/SjtgCS7.png',
-                        action=PostbackTemplateAction(
-                            label='',
-                            data=''
+                        action=MessageTemplateAction(
+                            label='IEST',
+                            text='IEST'
                         )
                     ),
                     ImageCarouselColumn(
                         image_url='https://i.imgur.com/4LqLit8.png',
-                        action=PostbackTemplateAction(
-                            label='',
-                            data=''
+                        action=MessageTemplateAction(
+                            label='IEST',
+                            text='IEST'
                         )
                     ),
                     ImageCarouselColumn(
                         image_url='https://i.imgur.com/X2Qb3Aq.png',
-                        action=PostbackTemplateAction(
-                            label='',
-                            data=''
+                        action=MessageTemplateAction(
+                            label='IEST',
+                            text='IEST'
                         )
                     ),
                     ImageCarouselColumn(
                         image_url='https://i.imgur.com/AVaLRWs.png',
-                        action=PostbackTemplateAction(
-                            label='',
-                            data=''
+                        action=MessageTemplateAction(
+                            label='IEST',
+                            text='IEST'
                         )
                     ),
                     ImageCarouselColumn(
                         image_url='https://i.imgur.com/g62b7HG.png',
-                        action=PostbackTemplateAction(
-                            label='',
-                            data=''
+                        action=MessageTemplateAction(
+                            label='IEST',
+                            text='IEST'
                         )
                     ),
                 ]
