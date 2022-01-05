@@ -12,10 +12,6 @@ from urllib.parse import parse_qsl
 line_bot_api = LineBotApi('8W2UAPtMfugubbs4TqODw6NOr2gjYHDtCKFXs0ncecIpw0o0ye+qw12Ja9FjJEHMl7TZ1tzQa5eJd5GWEb4lKcHBMxjZKKhHZ84BD+559+yHALORGVpDAzfXxPkIkZBMUZZ5mTzcf+PTfCgwIF5zqwdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('985d3775c70fb588d7846e2b89e1f796')
 
-# PostgreSQL 連線
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:123456@127.0.0.1:5432/IESTsign'
-db = SQLAlchemy(app)
-
 @app.route("/callback", methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
