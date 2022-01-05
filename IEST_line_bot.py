@@ -71,7 +71,7 @@ def Sendhelper(event): #按鈕樣板
                     ),
                     URITemplateAction(  #開啟網頁
                         label='加入我們',
-                        uri='https://www.facebook.com/fjulis.IEST'
+                        uri='http://line.me/ti/g/z9QufTl4pX'
                     ),
                 ]
             )
