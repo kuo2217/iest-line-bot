@@ -49,15 +49,25 @@ def SendCurriculum(event):
                 text = "2021/11/17\n基本安裝設定+Git使用\n課程連結:https://slides.com/sharonkuo/deck-c65f89\n\n2021/12/08\npython基礎語法\n課程連結:https://bit.ly/3FQfxLL\n\n2021/12/29\npython基本語法\n課程連結:https://bit.ly/3JBbFjY"))
 
 def SendTips(event):
-    message = TextSendMessage(
-        text = '請選擇',
-        quick_reply = QuickReply(
-            items=[
-                QuickReplyButton
-                    (action=MessageAction(label="課表", text="@課表"))
-        ])
-    ) 
-    line_bot_api.reply_message(event.reply_token, message)
+    try:
+        message = TextSendMessage(
+            text='請選擇',
+            quick_reply=QuickReply(
+                items=[
+                    QuickReplyButton(
+                        action=MessageAction(label="課表", text="@課表")),
+                    QuickReplyButton(
+                        action=MessageAction(label="阿喔", text="@1")),
+                    QuickReplyButton(
+                        action=MessageAction(label="阿喔", text="@2")),
+                    QuickReplyButton(
+                        action=MessageAction(label="阿喔", text="@3")),
+                    ]
+                )
+            )
+        line_bot_api.reply_message(event.reply_token,message)
+    except:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
 
 
     
