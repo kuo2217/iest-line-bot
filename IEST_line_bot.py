@@ -53,7 +53,7 @@ def SendHelper(event): #按鈕樣板
         message = TemplateSendMessage(
             alt_text='helper',
             template=ButtonsTemplate(
-                thumbnail_image_url='https://i.imgur.com/D7cqJoB.png',  #顯示的圖片
+                thumbnail_image_url='https://i.imgur.com/DXRL5Ia.png',  #顯示的圖片
                 title='小幫手',  #主標題
                 text='請選擇：',  #副標題
                 actions=[
