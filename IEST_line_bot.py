@@ -40,7 +40,7 @@ def handle_message(event):
     
     elif msg == 'IEST':
         line_bot_api.reply_message(event.reply_token,
-            TextSendMessage(text = "[┐∵]┘歡迎光臨資訊教育服務隊└[∵┌]"))
+            TextSendMessage(text = "[┐∵]┘歡迎光臨資訊教育服務隊"))
 
     else:
         line_bot_api.reply_message(event.reply_token,
