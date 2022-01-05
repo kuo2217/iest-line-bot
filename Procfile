@@ -1,0 +1,1 @@
+web: gunicorn IEST_line_bot:app
