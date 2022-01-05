@@ -87,7 +87,7 @@ def AboutUs(event):
             template=ImageCarouselTemplate(
                 columns=[
                     ImageCarouselColumn(
-                        image_url='https://i.imgur.com/eBS12QJ.png?1',
+                        image_url='https://i.imgur.com/mUOauOd.png',
                         action=MessageTemplateAction(
                             label='文字訊息',
                             text='賣披薩'
