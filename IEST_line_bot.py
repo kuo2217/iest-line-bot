@@ -29,14 +29,14 @@ def handle_message(event):
         AboutUs(event)
 
     elif msg == '@簽到':
-        Signin(event)
+        SignIn(event)
 
 
     elif msg == '@課程列表':
         SendCurriculum(event) 
 
     elif msg == '@小幫手':
-        Sendhelper(event)
+        SendHelper(event)
 
     else:
         line_bot_api.reply_message(event.reply_token,
@@ -48,7 +48,7 @@ def SendCurriculum(event):
             TextSendMessage(
                 text = "2021/11/17\n基本安裝設定+Git使用\n課程連結:https://slides.com/sharonkuo/deck-c65f89\n\n2021/12/08\npython基礎語法\n課程連結:https://bit.ly/3FQfxLL\n\n2021/12/29\npython基本語法\n課程連結:https://bit.ly/3JBbFjY"))
 
-def Sendhelper(event): #按鈕樣板
+def SendHelper(event): #按鈕樣板
     try:
         message = TemplateSendMessage(
             alt_text='helper',
@@ -80,7 +80,23 @@ def Sendhelper(event): #按鈕樣板
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
 
-
+def AboutUs(event):
+    try:
+        message = TemplateSendMessage(
+            alt_text='aboutus',
+            template=ImageCarouselTemplate(
+                columns=[
+                    ImageCarouselColumn(
+                        image_url='https://i.imgur.com/eBS12QJ.png?1',
+                        action=MessageTemplateAction(
+                        )
+                    ),
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token,message)
+    except:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))    
     
 
 if __name__ == '__main__':
