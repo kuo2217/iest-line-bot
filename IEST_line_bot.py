@@ -36,7 +36,7 @@ def handle_message(event):
         SendCurriculum(event) 
 
     elif msg == '@小幫手':
-        SendTips(event)
+        Sendhelper(event)
 
     else:
         line_bot_api.reply_message(event.reply_token,
@@ -48,17 +48,29 @@ def SendCurriculum(event):
             TextSendMessage(
                 text = "2021/11/17\n基本安裝設定+Git使用\n課程連結:https://slides.com/sharonkuo/deck-c65f89\n\n2021/12/08\npython基礎語法\n課程連結:https://bit.ly/3FQfxLL\n\n2021/12/29\npython基本語法\n課程連結:https://bit.ly/3JBbFjY"))
 
-def SendTips(event):
-    message = TextSendMessage(
-        text='請選擇',
-        quick_reply=QuickReply(
-            items=[
-                QuickReplyButton(
-                    action=MessageAction(label="課表", text="@課表")),
+def Sendhelper(event): #按鈕樣板
+    try:
+        message = TemplateSendMessage(
+            alt_text='helper',
+            template=ButtonsTemplate(
+                thumbnail_image_url='https://i.imgur.com/8icR5rH.png',  #顯示的圖片
+                title='小幫手',  #主標題
+                text='請選擇：',  #副標題
+                actions=[
+                    URITemplateAction(  #開啟網頁
+                        label='圖資課表(上學期)',
+                        uri='http://web.lins.fju.edu.tw/upload/dep/course/dep-course110_1_0831.pdf'
+                    ),
+                    URITemplateAction(  #開啟網頁
+                        label='圖資課表(下學期)',
+                        uri='http://web.lins.fju.edu.tw/upload/dep/course/dep-course110_2_0831.pdf'
+                    ),
                 ]
-                )
             )
-    line_bot_api.reply_message(event.reply_token,message)
+        )
+        line_bot_api.reply_message(event.reply_token, message)
+    except:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
 
 
     
