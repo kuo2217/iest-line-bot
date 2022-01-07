@@ -54,10 +54,10 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     user_id = event.source.user_id
-    sql_cmd = "select * from user where uid='" + user_id + "'"
+    sql_cmd = "select * from iestuser where uid='" + user_id + "'"
     query_data = db.engine.execute(sql_cmd)
     if len(list(query_data)) == 0:
-        sql_cmd = "insert into user (uid) values('" + user_id + "');"
+        sql_cmd = "insert into iestuser (uid) values('" + user_id + "');"
         db.engine.execute(sql_cmd)
 
     msg = event.message.text
