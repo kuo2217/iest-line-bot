@@ -11,6 +11,35 @@ from urllib.parse import parse_qsl
 
 line_bot_api = LineBotApi('8W2UAPtMfugubbs4TqODw6NOr2gjYHDtCKFXs0ncecIpw0o0ye+qw12Ja9FjJEHMl7TZ1tzQa5eJd5GWEb4lKcHBMxjZKKhHZ84BD+559+yHALORGVpDAzfXxPkIkZBMUZZ5mTzcf+PTfCgwIF5zqwdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('985d3775c70fb588d7846e2b89e1f796')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:123456@127.0.0.1:5432/IESTsign'
+db = SQLAlchemy(app)
+liffid = '1656789911-bMzdgkjW'
+
+#LIFF靜態頁面
+@app.route('/page')
+def page():
+	return render_template('hotel_form.html', liffid = liffid)
+
+# 重置資料庫
+@app.route('/createdb')
+def createdb():
+    sql = """
+    DROP TABLE IF EXISTS iestuser, sign;
+
+    CREATE TABLE iestuser (
+    id serial NOT NULL,
+    uid character varying(50) NOT NULL,
+    PRIMARY KEY (id));
+
+    CREATE TABLE sign (
+    id serial NOT NULL,
+    bid character varying(50) NOT NULL,
+    state character varying(20) NOT NULL,
+    date character varying(20) NOT NULL,
+    PRIMARY KEY (id))
+    """
+    db.engine.execute(sql)    
+    return "資料表建立成功！"
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -24,13 +53,19 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    user_id = event.source.user_id
+    sql_cmd = "select * from user where uid='" + user_id + "'"
+    query_data = db.engine.execute(sql_cmd)
+    if len(list(query_data)) == 0:
+        sql_cmd = "insert into user (uid) values('" + user_id + "');"
+        db.engine.execute(sql_cmd)
+
     msg = event.message.text
     if msg == '@關於我們':
         AboutUs(event)
 
     elif msg == '@簽到':
-        SignIn(event)
-
+        SignIn(event, user_id)
 
     elif msg == '@課程列表':
         SendCurriculum(event) 
@@ -41,6 +76,9 @@ def handle_message(event):
     elif msg == 'IEST':
         line_bot_api.reply_message(event.reply_token,
             TextSendMessage(text = "[┐∵]┘歡迎光臨資訊教育服務隊"))
+
+    elif msg[:6] == '123456' and len(msg) > 6:  #推播給所有顧客
+        pushMessage(event, msg)
 
     else:
         line_bot_api.reply_message(event.reply_token,
@@ -139,6 +177,33 @@ def AboutUs(event):
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))    
     
+def SignIn(event, user_id):  #簽到
+    try:
+        sql_cmd = "select * from sign where bid='" + user_id + "'"
+        query_data = db.engine.execute(sql_cmd)
+        message = TemplateSendMessage(
+            alt_text = "簽到",
+                actions=[
+                    URITemplateAction(label='簽到表', uri='https://liff.line.me/' + liffid)  #開啟LIFF讓使用者輸入訂房資料
+                ])
+        line_bot_api.reply_message(event.reply_token, message)
+    except:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+
+def pushMessage(event, msg):
+    try:
+        mtext = msg[6:]  #取得訊息
+        sql_cmd = "select * from formuser"
+        query_data = db.engine.execute(sql_cmd)
+        userall = list(query_data)
+        for users in userall:  #逐一推播
+            message = TextSendMessage(
+                text = mtext
+            )
+            line_bot_api.push_message(to=users[1], messages=[message])  #推播訊息
+    except:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+
 
 if __name__ == '__main__':
     app.run()
