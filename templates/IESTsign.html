@@ -17,7 +17,7 @@
             </select>
             <br />
             <label>日期</label>
-            <input type="date" id="out_datetime" value="" class="form-control" />
+            <input type="date" id="datetime" value="" class="form-control" />
             <br />
             <button class="btn btn-success btn-block" id="btn_reserve">確定</button>
         </div>
@@ -28,15 +28,11 @@
             liff.init({liffId: myLiffId });
         }
 
-        function reserve(type, amount, in_datetime, out_datetime) {
-            if (amount == '' || type == '' || in_datetime == '' || out_datetime=='') {  //資料檢查
+        function reserve(type, datetime) {
+            if (type == '' || datetime=='') {  //資料檢查
                 alert('所有欄位都要填寫！');
                 return;
             }
-    		if ((Date.parse(in_datetime)).valueOf() >= (Date.parse(out_datetime)).valueOf()) {
-    			alert("日期！");
-    			return;
-    		}
             var msg = "###";  //回傳訊息字串
             msg = msg + type + "/";
             msg = msg + amount + "/";
@@ -55,7 +51,7 @@
 		$(document).ready(function () {
 			initializeLiff('{{ liffid }}');
             $('#btn_reserve').click(function (e) {  //按下確定鈕
-                reserve($('#sel_type').val(), $('#txb_amount').val(), $('#in_datetime').val(), $('#out_datetime').val());
+                reserve($('#sel_type').val(), $('#txb_amount').val(), $('#datetime').val());
             });
 		});
 	</script>
