@@ -181,9 +181,15 @@ def SignIn(event, user_id):  #簽到
         query_data = db.engine.execute(sql_cmd)
         message = TemplateSendMessage(
             alt_text = "簽到",
+            template = ButtonsTemplate(
+                thumbnail_image_url='https://i.imgur.com/1NSDAvo.jpg',
+                title='簽到表',
+                text='請按',
                 actions=[
-                    URITemplateAction(label='簽到表', uri='https://liff.line.me/' + liffid)  #開啟LIFF讓使用者輸入訂房資料
-                ])
+                    URITemplateAction(label='簽到', uri='https://liff.line.me/' + liffid)  #開啟LIFF讓使用者輸入訂房資料
+                ]
+            )
+        )
         line_bot_api.reply_message(event.reply_token, message)
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
