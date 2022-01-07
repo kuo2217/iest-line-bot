@@ -75,6 +75,9 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,
             TextSendMessage(text = "[┐∵]┘歡迎光臨資訊教育服務隊"))
 
+    elif msg[:3] == '###' and len(msg) > 3:  #處理LIFF傳回的FORM資料
+         manageForm(event, msg, user_id)
+
     elif msg[:6] == '123456' and len(msg) > 6:  #推播給所有顧客
         pushMessage(event, msg)
 
@@ -182,15 +185,34 @@ def SignIn(event, user_id):  #簽到
         message = TemplateSendMessage(
             alt_text = "簽到",
             template = ButtonsTemplate(
-                thumbnail_image_url='https://i.imgur.com/1NSDAvo.jpg',
+                thumbnail_image_url='https://i.imgur.com/vzCuRFI.png',
                 title='簽到表',
-                text='請按',
+                text='請選擇',
                 actions=[
                     URITemplateAction(label='簽到', uri='https://liff.line.me/' + liffid)  #開啟LIFF讓使用者輸入訂房資料
                 ]
             )
         )
         line_bot_api.reply_message(event.reply_token, message)
+    except:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
+
+def manageForm(event, msg, user_id):  #處理LIFF傳回的FORM資料
+    try:
+        flist = msg[3:].split('/')  #去除前三個「#」字元再分解字串
+        state = flist[0]  #取得輸入資料
+        date = flist[1]
+        sql_cmd = "insert into booking (bid, state, date) values('" + user_id + "', '" + state + "', '" + date + "');"
+        db.engine.execute(sql_cmd)
+        text1 = "簽到成功："
+        text1 += "\n簽到狀態：" + state
+        text1 += "\n房間數量：" + date
+        text1 += "\n入住日期：" + in_date
+        text1 += "\n退房日期：" + out_date
+        message = TextSendMessage(  #顯示訂房資料
+            text = text1
+        )
+        line_bot_api.reply_message(event.reply_token,message)
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
 
