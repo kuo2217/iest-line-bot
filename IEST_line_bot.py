@@ -197,14 +197,14 @@ def SignIn(event, user_id):  #簽到
 def pushMessage(event, msg):
     try:
         mtext = msg[6:]  #取得訊息
-        sql_cmd = "select * from formuser"
+        sql_cmd = "select * from iestuser"
         query_data = db.engine.execute(sql_cmd)
         userall = list(query_data)
-        for users in userall:  #逐一推播
+        for user in userall:  #逐一推播
             message = TextSendMessage(
                 text = mtext
             )
-            line_bot_api.push_message(to=users[1], messages=[message])  #推播訊息
+            line_bot_api.push_message(to=user[1], messages=[message])  #推播訊息
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))
 
