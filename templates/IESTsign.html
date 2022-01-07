@@ -33,13 +33,12 @@
                 alert('所有欄位都要填寫！');
                 return;
             }
-            var msg = "###";  //回傳訊息字串
-            msg = msg + type + "/";
-            msg = msg + date + "/";
-
+            var ms = "###";  //回傳訊息字串
+            ms = ms + type + "/";
+            ms = ms + date + "/";
 			liff.sendMessages([  //推播訊息
 				{ type: 'text',
-				  text: msg
+				  text: ms
 				}
 			])
 				.then(() => {
