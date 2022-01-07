@@ -18,7 +18,7 @@ liffid = '1656789911-bMzdgkjW'
 #LIFF靜態頁面
 @app.route('/page')
 def page():
-	return render_template('hotel_form.html', liffid = liffid)
+	return render_template('IESTsign.html', liffid = liffid)
 
 # 重置資料庫
 @app.route('/createdb')
