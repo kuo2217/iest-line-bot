@@ -182,8 +182,7 @@ def SignIn(event, msg):  #簽到
     query_data = db.engine.execute(sql_cmd)
     if len(list(query_data)) == 0:
         line_bot_api.reply_message(event.reply_token,
-        TextSendMessage(text = "第一次簽到請輸入學號:"))
-        msg = "insert into iestuser (studentID) values('" + user_id + "');"            
+        TextSendMessage(text = "第一次簽到請輸入學號:"))           
         sql_cmd = "insert into iestuser (uid) values('" + user_id + "');"
         db.engine.execute(sql_cmd)
     try:
