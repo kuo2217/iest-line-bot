@@ -28,14 +28,14 @@
             liff.init({liffId: myLiffId });
         }
 
-        function reserve(type, datetime) {
-            if (type == '' || datetime=='') {  //資料檢查
+        function reserve(sel_type, datetime) {
+            if (sel_type == '' || datetime=='') {  //資料檢查
                 alert('所有欄位都要填寫！');
                 return;
             }
             var ms = "###";  //回傳訊息字串
-            ms = ms + type + "/";
-            ms = ms + date + "/";
+            ms = ms + sel_type + "/";
+            ms = ms + datetime + "/";
 			liff.sendMessages([  //推播訊息
 				{ type: 'text',
 				  text: ms

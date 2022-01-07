@@ -27,11 +27,15 @@ def createdb():
     CREATE TABLE iestuser (
     id serial NOT NULL,
     uid character varying(50) NOT NULL,
+    studentID varying(50) NOT NULL,
+    name varying(50) NOT NULL,
     PRIMARY KEY (id));
 
     CREATE TABLE sign (
     id serial NOT NULL,
     bid character varying(50) NOT NULL,
+    studentID varying(50) NOT NULL,
+    name varying(50) NOT NULL,
     state character varying(20) NOT NULL,
     date character varying(20) NOT NULL,
     PRIMARY KEY (id))
@@ -51,19 +55,13 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    user_id = event.source.user_id
-    sql_cmd = "select * from iestuser where uid='" + user_id + "'"
-    query_data = db.engine.execute(sql_cmd)
-    if len(list(query_data)) == 0:
-        sql_cmd = "insert into iestuser (uid) values('" + user_id + "');"
-        db.engine.execute(sql_cmd)
 
     msg = event.message.text
     if msg == '@關於我們':
         AboutUs(event)
 
     elif msg == '@簽到':
-        SignIn(event, user_id)
+        SignIn(event)
 
     elif msg == '@課程列表':
         SendCurriculum(event) 
@@ -178,7 +176,16 @@ def AboutUs(event):
     except:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='發生錯誤！'))    
     
-def SignIn(event, user_id):  #簽到
+def SignIn(event, msg):  #簽到
+    user_id = event.source.user_id
+    sql_cmd = "select * from iestuser where uid='" + user_id + "'"
+    query_data = db.engine.execute(sql_cmd)
+    if len(list(query_data)) == 0:
+        line_bot_api.reply_message(event.reply_token,
+        TextSendMessage(text = "第一次簽到請輸入學號:"))
+        msg = "insert into iestuser (studentID) values('" + user_id + "');"            
+        sql_cmd = "insert into iestuser (uid) values('" + user_id + "');"
+        db.engine.execute(sql_cmd)
     try:
         sql_cmd = "select * from sign where bid='" + user_id + "'"
         query_data = db.engine.execute(sql_cmd)
