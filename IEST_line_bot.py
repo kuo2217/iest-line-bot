@@ -76,7 +76,7 @@ def handle_message(event):
             TextSendMessage(text = "[┐∵]┘歡迎光臨資訊教育服務隊"))
 
     elif msg[:3] == '###' and len(msg) > 3:  #處理LIFF傳回的FORM資料
-         manageForm(event, msg, user_id)
+        manageForm(event, msg, user_id)
 
     elif msg[:6] == '123456' and len(msg) > 6:  #推播給所有顧客
         pushMessage(event, msg)
@@ -202,9 +202,9 @@ def manageForm(event, msg, user_id):  #處理LIFF傳回的FORM資料
         flist = msg[3:].split('/')  #去除前三個「#」字元再分解字串
         state = flist[0]  #取得輸入資料
         date = flist[1]
-        sql_cmd = "insert into booking (bid, state, date) values('" + user_id + "', '" + state + "', '" + date + "');"
+        sql_cmd = "insert into sign (bid, state, date) values('" + user_id + "', '" + state + "', '" + date + "');"
         db.engine.execute(sql_cmd)
-        text1 = "簽到成功："
+        text1 = "完成!"
         text1 += "\n簽到狀態：" + state
         text1 += "\n時間：" + date
         message = TextSendMessage(  #顯示訂房資料
