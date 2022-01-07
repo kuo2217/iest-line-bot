@@ -206,9 +206,7 @@ def manageForm(event, msg, user_id):  #處理LIFF傳回的FORM資料
         db.engine.execute(sql_cmd)
         text1 = "簽到成功："
         text1 += "\n簽到狀態：" + state
-        text1 += "\n房間數量：" + date
-        text1 += "\n入住日期：" + in_date
-        text1 += "\n退房日期：" + out_date
+        text1 += "\n時間：" + date
         message = TextSendMessage(  #顯示訂房資料
             text = text1
         )
