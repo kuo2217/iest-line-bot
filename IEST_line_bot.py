@@ -11,7 +11,7 @@ from urllib.parse import parse_qsl
 
 line_bot_api = LineBotApi('8W2UAPtMfugubbs4TqODw6NOr2gjYHDtCKFXs0ncecIpw0o0ye+qw12Ja9FjJEHMl7TZ1tzQa5eJd5GWEb4lKcHBMxjZKKhHZ84BD+559+yHALORGVpDAzfXxPkIkZBMUZZ5mTzcf+PTfCgwIF5zqwdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('985d3775c70fb588d7846e2b89e1f796')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:123456@127.0.0.1:5432/IESTsign'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://nghzkyrhisdvsf:c0ad142a2d4add238a03b5e80de731e985502bc435a78418229badd591075820@ec2-3-226-165-74.compute-1.amazonaws.com:5432/d8bkbshheajqlc'
 db = SQLAlchemy(app)
 liffid = '1656789911-bMzdgkjW'
 
