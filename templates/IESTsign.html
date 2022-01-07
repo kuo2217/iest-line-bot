@@ -33,14 +33,7 @@
                 alert('所有欄位都要填寫！');
                 return;
             }
-			liff.sendMessages([  //推播訊息
-				{ type: 'text',
-				  text: msg
-				}
-			])
-				.then(() => {
-					liff.closeWindow();  //關閉視窗
-				});
+			liff.closeWindow();  //關閉視窗
 		}
 
 		$(document).ready(function () {
