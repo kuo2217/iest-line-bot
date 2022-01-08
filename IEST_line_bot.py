@@ -32,8 +32,8 @@ def createdb():
     CREATE TABLE sign (
     id serial NOT NULL,
     bid character varying(50) NOT NULL,
-    studentID varying(50) NOT NULL,
-    name varying(50) NOT NULL,
+    studentID character varying(20) NOT NULL,
+    name character varying(20) NOT NULL,
     state character varying(20) NOT NULL,
     date character varying(20) NOT NULL,
     PRIMARY KEY (id))
