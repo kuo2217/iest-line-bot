@@ -20,7 +20,7 @@
             </select>
             <br />
             <label>日期</label>
-            <input type="date" id="datetime" value="" class="form-control" />
+            <input type="datetime-local" id="datetime" value="" class="form-control" />
             <br />
             <button class="btn btn-success btn-block" id="btn_reserve">確定</button>
         </div>
@@ -37,9 +37,9 @@
                 return;
             }
             var ms = "###";  //回傳訊息字串
-            ms = ms + datetime + "/"
+            ms = ms + stname + "/"
             ms = ms + sel_type + "/";
-            ms = ms + stname + '/';
+            ms = ms + datetime + '/';
 			liff.sendMessages([  //推播訊息
 				{ type: 'text',
 				  text: ms
