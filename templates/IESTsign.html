@@ -39,7 +39,7 @@
             var ms = "###";  //回傳訊息字串
             ms = ms + sname + "/"
             ms = ms + sel_type + "/";
-            ms = ms + datetime + "/";
+            ms = ms + datetime+ '/';
 			liff.sendMessages([  //推播訊息
 				{ type: 'text',
 				  text: ms
@@ -52,7 +52,7 @@
 		$(document).ready(function () {
 			initializeLiff('{{ liffid }}');
             $('#btn_reserve').click(function (e) {  //按下確定鈕
-                reserve($('#sname').val(),$('#sel_type').val(), $('#datetime')[0].value);
+                reserve($('#sname').val(),$('#sel_type').val(), $('#datetime')[0].val());
             });
 		});
 	</script>
