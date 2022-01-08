@@ -31,15 +31,15 @@
             liff.init({liffId: myLiffId });
         }
 
-        function reserve(sel_type, datetime, stname) {
+        function reserve(stname, sel_type, datetime) {
             if (sel_type == '' || datetime=='' || stname =='' ) {  //資料檢查
                 alert('所有欄位都要填寫！');
                 return;
             }
             var ms = "###";  //回傳訊息字串
-            ms = ms + stname + "/"
+            ms = ms + datetime + "/"
             ms = ms + sel_type + "/";
-            ms = ms + datetime + '/';
+            ms = ms + stname + '/';
 			liff.sendMessages([  //推播訊息
 				{ type: 'text',
 				  text: ms
