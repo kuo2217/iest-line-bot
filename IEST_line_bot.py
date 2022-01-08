@@ -210,7 +210,7 @@ def manageForm(event, msg, user_id):  #處理LIFF傳回的FORM資料
         text1 = "完成!"
         text1 += "\n狀態：" + state
         text1 += "\n時間：" + date
-        message = TextSendMessage(  #顯示訂房資料s
+        message = TextSendMessage(  #顯示訂房資料
             text = text1
         )
         line_bot_api.reply_message(event.reply_token,message)
