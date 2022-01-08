@@ -27,13 +27,11 @@ def createdb():
     CREATE TABLE iestuser (
     id serial NOT NULL,
     uid character varying(50) NOT NULL,
-    first character varying(10) NOT NULL,
     PRIMARY KEY (id));
 
     CREATE TABLE sign (
     id serial NOT NULL,
     bid character varying(50) NOT NULL,
-    studentID character varying(20) NOT NULL,
     name character varying(20) NOT NULL,
     state character varying(20) NOT NULL,
     date character varying(20) NOT NULL,
@@ -57,25 +55,17 @@ def handle_message(event):
     user_id = event.source.user_id
     sql_cmd = "select * from iestuser where uid='" + user_id + "'"
     query_data = db.engine.execute(sql_cmd)
-    datalist = list(query_data)
-    if len(datalist) == 0:
-        sql_cmd = "insert into iestuser (uid, first) values('" + user_id + "', 'yes');"
-        db.engine.execute(sql_cmd)
-        mode = 'yes'
-    else:
-        mode = datalist[0][2]
+    if len(list(query_data)) == 0:       
+        sql_cmd = "insert into iestuser (uid) values('" + user_id + "');"
+        db.engine.execute(sql_cmd)  
 
 
     msg = event.message.text
     if msg == '@關於我們':
         AboutUs(event)
 
-    elif msg == '@簽到' and mode == 'no':
+    elif msg == '@簽到':
         SignIn(event, user_id)
-
-    elif msg == '@簽到' and mode == 'yes':
-        line_bot_api.reply_message(event.reply_token,
-            TextSendMessage(text = "第一次簽到請輸入姓名:"))        
 
     elif msg == '@課程列表':
         SendCurriculum(event) 
@@ -212,12 +202,13 @@ def SignIn(event, user_id):  #簽到
 def manageForm(event, msg, user_id):  #處理LIFF傳回的FORM資料
     try:
         flist = msg[3:].split('/')  #去除前三個「#」字元再分解字串
-        state = flist[0]  #取得輸入資料
-        date = flist[1]
-        sql_cmd = "insert into sign (bid, state, date) values('" + user_id + "', '" + state + "', '" + date + "');"
+        name = flist[0]  #取得輸入資料
+        state = flist[1]
+        date = flist[2]
+        sql_cmd = "insert into sign (bid, name, state, date) values('" + user_id + "', '" + name + "', '" + state + "', '" + date + "');"
         db.engine.execute(sql_cmd)
         text1 = "完成!"
-        text1 += "\n簽到狀態：" + state
+        text1 += "\n狀態：" + state
         text1 += "\n時間：" + date
         message = TextSendMessage(  #顯示訂房資料
             text = text1

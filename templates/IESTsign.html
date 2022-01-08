@@ -10,6 +10,9 @@
 <body>
     <div class="row" style="margin: 10px">
         <div class="col-12" style="margin: 10px">
+            <label>姓名</label>
+            <input type="text" id="sname" class="form-control" />
+            <br />
             <label>狀態</label>
             <select id="sel_type" class="form-control">
                 <option selected>簽到</option>
@@ -17,7 +20,7 @@
             </select>
             <br />
             <label>日期</label>
-            <input type="date" id="datetime" value="" class="form-control" />
+            <input type="datetime-local" id="datetime" value="" class="form-control" />
             <br />
             <button class="btn btn-success btn-block" id="btn_reserve">確定</button>
         </div>
@@ -29,11 +32,12 @@
         }
 
         function reserve(sel_type, datetime) {
-            if (sel_type == '' || datetime=='') {  //資料檢查
+            if (sel_type == '' || datetime=='' || sname =='' ) {  //資料檢查
                 alert('所有欄位都要填寫！');
                 return;
             }
             var ms = "###";  //回傳訊息字串
+            ms = ms + sname + "/"
             ms = ms + sel_type + "/";
             ms = ms + datetime + "/";
 			liff.sendMessages([  //推播訊息
@@ -48,7 +52,7 @@
 		$(document).ready(function () {
 			initializeLiff('{{ liffid }}');
             $('#btn_reserve').click(function (e) {  //按下確定鈕
-                reserve($('#sel_type').val(), $('#datetime').val());
+                reserve($('#sname').val(),$('#sel_type').val(), $('#datetime').val());
             });
 		});
 	</script>
