@@ -27,6 +27,7 @@ def createdb():
     CREATE TABLE iestuser (
     id serial NOT NULL,
     uid character varying(50) NOT NULL,
+    first character varying(10) NOT NULL,
     PRIMARY KEY (id));
 
     CREATE TABLE sign (
@@ -56,15 +57,25 @@ def handle_message(event):
     user_id = event.source.user_id
     sql_cmd = "select * from iestuser where uid='" + user_id + "'"
     query_data = db.engine.execute(sql_cmd)
-    if len(list(query_data)) == 0:       
-        sql_cmd = "insert into iestuser (uid) values('" + user_id + "');"
-        db.engine.execute(sql_cmd)    
+    datalist = list(query_data)
+    if len(datalist) == 0:
+        sql_cmd = "insert into iestuser (uid, first) values('" + user_id + "', 'yes');"
+        db.engine.execute(sql_cmd)
+        mode = 'yes'
+    else:
+        mode = datalist[0][2]
+
+
     msg = event.message.text
     if msg == '@關於我們':
         AboutUs(event)
 
-    elif msg == '@簽到':
+    elif msg == '@簽到' and mode == 'no':
         SignIn(event, user_id)
+
+    elif msg == '@簽到' and mode == 'yes':
+        line_bot_api.reply_message(event.reply_token,
+            TextSendMessage(text = "第一次簽到請輸入姓名:"))        
 
     elif msg == '@課程列表':
         SendCurriculum(event) 
