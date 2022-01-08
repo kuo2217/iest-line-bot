@@ -20,7 +20,7 @@
             </select>
             <br />
             <label>日期</label>
-            <input type="datetime-local" id="datetime" value="" class="form-control" />
+            <input type="datetime" id="datetime" value="" class="form-control" />
             <br />
             <button class="btn btn-success btn-block" id="btn_reserve">確定</button>
         </div>
@@ -52,7 +52,7 @@
 		$(document).ready(function () {
 			initializeLiff('{{ liffid }}');
             $('#btn_reserve').click(function (e) {  //按下確定鈕
-                reserve($('#sname').val(),$('#sel_type').val(), $('#datetime')[0].val());
+                reserve($('#sname').val(),$('#sel_type').val(), $('#datetime').val());
             });
 		});
 	</script>
