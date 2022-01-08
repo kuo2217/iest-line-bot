@@ -34,7 +34,7 @@ def createdb():
     bid character varying(50) NOT NULL,
     name character varying(20) NOT NULL,
     state character varying(20) NOT NULL,
-    date character varying(20) NOT NULL,
+    date character varying(50) NOT NULL,
     PRIMARY KEY (id))
     """
     db.engine.execute(sql)    
