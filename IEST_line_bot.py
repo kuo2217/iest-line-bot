@@ -77,6 +77,10 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,
             TextSendMessage(text = "[┐∵]┘歡迎光臨資訊教育服務隊"))
 
+    elif msg == '麻將':
+        line_bot_api.reply_message(event.reply_token,
+            TextSendMessage(text = "    🀙🀚🀛🀜🀝🀞🀟🀠🀡🀢🀣\n🀥    🀗🀐🀏🀎🀍🀌🀋🀊🀉   🀥\n🀖  🀗           🀙  🀥\n🀘  🀗           🀙  🀔\n🀕  🀡           🀁  🀁\n🀖  🀗           🀁  🀁\n🀘    🀎🀍🀌🀋🀊🀉🀇🀉🀇   🀁\n   🀐🀏🀎🀍🀌🀋🀊🀉🀇🀆🀅🀁"))
+
     elif msg[:3] == '###' and len(msg) > 3:  #處理LIFF傳回的FORM資料
         manageForm(event, msg, user_id)
 
