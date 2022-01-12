@@ -80,7 +80,7 @@ def handle_message(event):
     elif msg[:3] == '###' and len(msg) > 3:  #處理LIFF傳回的FORM資料
         manageForm(event, msg, user_id)
 
-    elif msg[:6] == '1234567' and len(msg) > 7:  #推播給所有顧客
+    elif msg[:6] == '123456' and len(msg) > 6:  #推播給所有顧客
         pushMessage(event, msg)
 
     else:
