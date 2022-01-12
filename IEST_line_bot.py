@@ -80,7 +80,7 @@ def handle_message(event):
     elif msg[:3] == '###' and len(msg) > 3:  #處理LIFF傳回的FORM資料
         manageForm(event, msg, user_id)
 
-    elif msg[:6] == '123456' and len(msg) > 6:  #推播給所有顧客
+    elif msg[:6] == '1234567' and len(msg) > 7:  #推播給所有顧客
         pushMessage(event, msg)
 
     else:
@@ -106,15 +106,15 @@ def SendHelper(event): #按鈕樣板
                         label='圖資課表(上學期)',
                         uri='http://web.lins.fju.edu.tw/upload/dep/course/dep-course110_1_0831.pdf'
                     ),
-                    URITemplateAction(  #開啟網頁
+                    URITemplateAction(  
                         label='圖資課表(下學期)',
                         uri='http://web.lins.fju.edu.tw/upload/dep/course/dep-course110_2_0831.pdf'
                     ),
-                    URITemplateAction(  #開啟網頁
+                    URITemplateAction(  
                         label='聯絡我們',
                         uri='https://www.facebook.com/fjulis.IEST'
                     ),
-                    URITemplateAction(  #開啟網頁
+                    URITemplateAction(  
                         label='加入我們',
                         uri='http://line.me/ti/g/z9QufTl4pX'
                     ),
@@ -210,7 +210,7 @@ def manageForm(event, msg, user_id):  #處理LIFF傳回的FORM資料
         text1 = "完成!"
         text1 += "\n狀態：" + state
         text1 += "\n時間：" + date
-        message = TextSendMessage(  #顯示訂房資料
+        message = TextSendMessage(  
             text = text1
         )
         line_bot_api.reply_message(event.reply_token,message)
